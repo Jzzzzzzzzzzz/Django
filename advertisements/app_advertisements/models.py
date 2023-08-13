@@ -23,10 +23,10 @@ class Advertisements(models.Model):
     #
     #
 
-
     class Meta:
         db_table = "Advertisements"
-        verbose_name = 'Advertisements'
+        verbose_name = "Advertisements"
+        verbose_name_plural = "Advertisements"
 
     def __str__(self):
         return f"Advertisements(id = {self.id},title = {self.title},price = {self.price},negotiable = {self.negotiable})"
@@ -58,4 +58,5 @@ class Advertisements(models.Model):
             )
         else:
             return self.created_at.strftime("%d.%m.%Y в %H:%M:%S")
+#Успехов!!!
 
