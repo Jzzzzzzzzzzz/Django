@@ -58,5 +58,5 @@ class Advertisements(models.Model):
             )
         else:
             return self.created_at.strftime("%d.%m.%Y в %H:%M:%S")
-#Успехов!!!
+
 
