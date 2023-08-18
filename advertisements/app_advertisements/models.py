@@ -1,8 +1,10 @@
 from django.contrib import admin
 from django.db import models
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 from django.utils.html import format_html
 
+User = get_user_model()
 
 
 # Заголовок
@@ -20,13 +22,17 @@ class Advertisements(models.Model):
     negotiable = models.BooleanField("торг",help_text="отметьте,если уместен")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    #
-    #
+    #Отступ
+    #Отступ
+    user = models.ForeignKey(User,verbose_name="пользователь",on_delete=models.CASCADE)
+    #Отступ
+    image = models.ImageField("Изображение",upload_to="advertisements/")
 
     class Meta:
         db_table = "Advertisements"
         verbose_name = "Advertisements"
         verbose_name_plural = "Advertisements"
+
 
     def __str__(self):
         return f"Advertisements(id = {self.id},title = {self.title},price = {self.price},negotiable = {self.negotiable})"
@@ -58,5 +64,14 @@ class Advertisements(models.Model):
             )
         else:
             return self.created_at.strftime("%d.%m.%Y в %H:%M:%S")
+
+    @admin.display(description='изображение')
+    def image_display(self):
+        if self.image:
+            return format_html(
+                '<img src="{}" style="width: 55px;">', self.image.url
+            )
+        else:
+            return 'No Image'
 
 

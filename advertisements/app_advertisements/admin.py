@@ -2,12 +2,12 @@ from django.contrib import admin
 from .models import Advertisements
 
 class AdvertisementAdmin(admin.ModelAdmin):
-    list_display = ["id","title","description","price","created_date","updated_date","negotiable"]
+    list_display = ["id","user","title","description","price","created_date","updated_date","negotiable","image_display"]
     list_filter = ["negotiable","created_at","updated_at"]
     actions = ["make_auction_as_false","make_auction_as_true"]
     fieldsets = (
         ("Общее",{
-            "fields":("title","description"),
+            "fields":("title","description","user","image"),
             "classes":["collapse"]
         }),
         ("Финансы",{
@@ -15,7 +15,6 @@ class AdvertisementAdmin(admin.ModelAdmin):
             "classes": ["collapse"]
         })
     )
-
 
 
 
